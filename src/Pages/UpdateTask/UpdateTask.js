@@ -32,7 +32,7 @@ const UpdateTask = () => {
           refetch();
         }
       })
-    //   .catch(toast.error("Something went wrong"));
+      .catch((err)=>toast.error("Something went wrong"));
   };
   if (isLoading) return <progress class="progress w-56"></progress>;
 

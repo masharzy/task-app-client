@@ -11,7 +11,7 @@ const Todo = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data, e) => {
-    await axios
+    axios
       .post("http://localhost:5000/task", data)
       .then((res) => {
         if (res.status === 200) {
@@ -20,7 +20,7 @@ const Todo = () => {
           refetch();
         }
       })
-      .catch(toast.error("Something went wrong"));
+      .catch((err)=>toast.error("Something went wrong"));
   };
 
   const {
