@@ -5,6 +5,7 @@ import Todo from "./Pages/Todo/Todo";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Home from "./Pages/Home/Home";
+import UpdateTask from "./Pages/UpdateTask/UpdateTask";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/todo" element={<Todo />} />
+        <Route path="/update-task/:id" element={<UpdateTask />} />
       </Routes>
       <ToastContainer
         position="top-center"
