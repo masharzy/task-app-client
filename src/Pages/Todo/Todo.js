@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
+import Tasks from "../Tasks/Tasks";
 
 const Todo = () => {
   const {
@@ -59,13 +60,9 @@ const Todo = () => {
           />
         </div>
       </form>
-      {allTasks.map((task) => (
         <div className="w-full max-w-xl mx-auto mt-5">
-          <div class="rounded-lg bg-gray-800 shadow-xl text-left p-5">
-            <p>{task.name}</p>
-          </div>
+         <Tasks/>
         </div>
-      ))}
     </div>
   );
 };
