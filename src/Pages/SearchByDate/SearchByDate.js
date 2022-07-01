@@ -32,7 +32,7 @@ const SearchByDate = () => {
     console.log(selectedTasks);
   return (
     <div className="container mx-auto mb-2">
-      <h2 className="text-3xl text-white font-bold">Calendar</h2>
+      <h2 className="text-3xl text-white font-bold">Search Task by Date</h2>
       <div className="flex justify-center mt-5">
         <Calendar
           value={selectedDay}
