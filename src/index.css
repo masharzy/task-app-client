@@ -11,7 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   min-height: 100vh;
-  /* padding-bottom: 244px; */
+  padding-bottom: 244px;
 }
 
 code {
