@@ -17,7 +17,7 @@ const Todo = () => {
     data: allTasks,
     refetch,
   } = useQuery("tasks", () =>
-    fetch("http://localhost:5000/tasks").then((res) => res.json())
+    fetch("https://blooming-wildwood-07126.herokuapp.com/tasks").then((res) => res.json())
   );
 
   const date = new Date();
@@ -32,7 +32,7 @@ const Todo = () => {
       date: today,
     }
     axios
-      .post("http://localhost:5000/task", task)
+      .post("https://blooming-wildwood-07126.herokuapp.com/task", task)
       .then((res) => {
         if (res.status === 200) {
           e.target.reset();

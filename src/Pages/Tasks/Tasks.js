@@ -12,19 +12,19 @@ const Tasks = () => {
         data: tasks,
         refetch,
       } = useQuery("tasks", () =>
-        fetch("http://localhost:5000/tasks").then((res) => res.json())
+        fetch("https://blooming-wildwood-07126.herokuapp.com/tasks").then((res) => res.json())
       );
     
       if (isLoading) return <Spinner/>;
     
     return (
         tasks.map((task) => (
-            <div className="w-full mx-auto mt-5" key={task._id}>
+            <div className="w-full mx-auto mt-5 px-5" key={task._id}>
               <div className="rounded-lg bg-gray-800 shadow-xl text-left p-5 flex justify-between items-center">
                 <div className="flex">
                   <input type="checkbox" checked={task.completed} disabled={task.completed} onChange={(e) => {
                     if (e.target.checked) {
-                      axios.put(`http://localhost:5000/task/${task._id}`, {
+                      axios.put(`https://blooming-wildwood-07126.herokuapp.com/task/${task._id}`, {
                         completed: true,
                       }).then((res) => {
                         if (res.status === 200) {

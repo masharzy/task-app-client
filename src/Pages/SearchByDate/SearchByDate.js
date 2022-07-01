@@ -4,43 +4,42 @@ import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import axios from "axios";
 import { useState } from "react";
-import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Spinner from "../Shared/Spinner/Spinner";
 
 const SearchByDate = () => {
-    const todayDate = new Date();
-    const year = todayDate.getFullYear();
-    const month = todayDate.getMonth() + 1;
-    const day = todayDate.getDate();
-    const today = `${day}-${month}-${year}`;
+  const [selectedTasks, setSelectedTasks] = useState([]);
+  const todayDate = new Date();
+  const year = todayDate.getFullYear();
+  const month = todayDate.getMonth() + 1;
+  const day = todayDate.getDate();
+  const today = `${day}-${month}-${year}`;
   const [selectedDay, setSelectedDay] = useState(null);
-  const date =
-    selectedDay ?
-    `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}` : 
-    today;
-  const {
-    isLoading,
-    data: selectedTasks,
-    refetch,
-  } = useQuery("selectedTasks", () =>
-    fetch(`http://localhost:5000/tasks/${date}`).then((res) => res.json())
-  );
-  if (isLoading) return <Spinner/>;
+  const date = selectedDay
+    ? `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`
+    : today;
   return (
     <div className="container mx-auto mb-2">
       <h2 className="text-3xl text-white font-bold">Search Task by Date</h2>
       <div className="flex justify-center mt-5">
         <Calendar
           value={selectedDay}
-          onChange={setSelectedDay}
+          onChange={async (day) => {
+            setSelectedDay(day);
+            const { data } = await axios.get(
+              `https://blooming-wildwood-07126.herokuapp.com/tasks/${date}`
+            );
+            setSelectedTasks(data);
+          }}
           shouldHighlightWeekends
         />
       </div>
       {selectedTasks.length > 0 ? (
         selectedTasks.map((selectedTask) => (
-          <div className="w-full max-w-xl mx-auto mt-5" key={selectedTask._id}>
+          <div
+            className="w-full max-w-xl mx-auto mt-5 px-5"
+            key={selectedTask._id}
+          >
             <div className="rounded-lg bg-gray-800 shadow-xl text-left p-5 flex justify-between items-center">
               <div className="flex">
                 <input
@@ -50,16 +49,17 @@ const SearchByDate = () => {
                   onChange={(e) => {
                     if (e.target.checked) {
                       axios
-                        .put(`http://localhost:5000/task/${selectedTask._id}`, {
+                        .put(`https://blooming-wildwood-07126.herokuapp.com/task/${selectedTask._id}`, {
                           completed: true,
                         })
                         .then((res) => {
                           if (res.status === 200) {
-                            refetch();
                             toast.success("Task Marked as Completed");
                           }
                         })
-                        .catch((err) => toast.error("Error Marking Task as Completed"));
+                        .catch((err) =>
+                          toast.error("Error Marking Task as Completed")
+                        );
                     }
                   }}
                   className="checkbox mr-2"

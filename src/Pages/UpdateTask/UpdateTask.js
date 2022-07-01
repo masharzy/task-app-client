@@ -13,7 +13,7 @@ const UpdateTask = () => {
     data: task,
     refetch,
   } = useQuery("task", () =>
-    fetch(`http://localhost:5000/task/${id}`).then((res) => res.json())
+    fetch(`https://blooming-wildwood-07126.herokuapp.com/task/${id}`).then((res) => res.json())
   );
 
   const {
@@ -23,7 +23,7 @@ const UpdateTask = () => {
   } = useForm();
   const onSubmit = async (data, e) => {
     await axios
-      .put(`http://localhost:5000/task/${id}`, data)
+      .put(`https://blooming-wildwood-07126.herokuapp.com/task/${id}`, data)
       .then((res) => {
         if (res.status === 200) {
           e.target.reset();

@@ -3,7 +3,7 @@ import Spinner from "../Shared/Spinner/Spinner";
 
 const CompletedTasks = () => {
   const { isLoading, data: completedTasks } = useQuery("completedTasks", () =>
-    fetch("http://localhost:5000/tasks/completed").then((res) => res.json())
+    fetch("https://blooming-wildwood-07126.herokuapp.com/tasks/completed").then((res) => res.json())
   );
   if (isLoading) return <Spinner/>;
   return (
