@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { toast } from 'react-toastify';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const Tasks = () => {
     const {
@@ -15,7 +16,7 @@ const Tasks = () => {
         fetch("http://localhost:5000/tasks").then((res) => res.json())
       );
     
-      if (isLoading) return <progress class="progress w-56"></progress>;
+      if (isLoading) return <Spinner/>;
     
     return (
         tasks.map((task) => (
@@ -34,9 +35,15 @@ const Tasks = () => {
                       }).catch((err) => console.log(err));
                     }
                   }} class="checkbox mr-2" />
-                  <p>{task.name}</p>
+                    {
+                      task.completed ?
+                      <p>{task.name} <span className='text-green-700 font-bold'>(Completed)</span></p> :
+                      <p>{task.name}</p>
+                    }
                 </div>
-                <Link to={`/update-task/${task._id}`}><FontAwesomeIcon className="text-xl cursor-pointer" title="Edit Task" icon={faPenToSquare} /></Link>
+                {
+                  !task.completed && <Link to={`/update-task/${task._id}`}><FontAwesomeIcon className="text-xl cursor-pointer" title="Edit Task" icon={faPenToSquare} /></Link>
+                }
               </div>
             </div>
           ))

@@ -6,6 +6,9 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Home from "./Pages/Home/Home";
 import UpdateTask from "./Pages/UpdateTask/UpdateTask";
+import CompletedTasks from "./Pages/CompletedTasks/CompletedTasks";
+import SearchByDate from "./Pages/SearchByDate/SearchByDate";
+import Footer from "./Pages/Shared/Footer/Footer";
 
 function App() {
   return (
@@ -15,7 +18,10 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/todo" element={<Todo />} />
         <Route path="/update-task/:id" element={<UpdateTask />} />
+        <Route path="/completed-tasks" element={<CompletedTasks />} />
+        <Route path="/calendar" element={<SearchByDate />} />
       </Routes>
+      <Footer/>
       <ToastContainer
         position="top-center"
         autoClose={5000}

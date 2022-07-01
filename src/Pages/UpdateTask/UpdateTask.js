@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const UpdateTask = () => {
   const { id } = useParams();
@@ -34,12 +35,12 @@ const UpdateTask = () => {
       })
       .catch((err)=>toast.error("Something went wrong"));
   };
-  if (isLoading) return <progress class="progress w-56"></progress>;
+  if (isLoading) return <Spinner/>;
 
   const { name } = task;
 
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <h2 className="text-3xl text-white font-bold">
         Edit Task: <br /> {name}
       </h2>
