@@ -4,11 +4,13 @@ import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import axios from "axios";
 import { useState } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const SearchByDate = () => {
-  const [selectedTasks, setSelectedTasks] = useState([]);
+  // const [selectedTasks, setSelectedTasks] = useState([]);
   const todayDate = new Date();
   const year = todayDate.getFullYear();
   const month = todayDate.getMonth() + 1;
@@ -18,6 +20,18 @@ const SearchByDate = () => {
   const date = selectedDay
     ? `${selectedDay.day}-${selectedDay.month}-${selectedDay.year}`
     : today;
+
+    // get tasks by date with useQuery
+  const { isLoading, data: selectedTasks,  refetch} = useQuery(
+    ["tasks", date],
+    async () => {
+      const res = await axios.get(`https://blooming-wildwood-07126.herokuapp.com/tasks/${date}`);
+      return res.data;
+    }
+  );
+
+  if(isLoading) return <Spinner/>;  
+
   return (
     <div className="container mx-auto mb-2">
       <h2 className="text-3xl text-white font-bold">Search Task by Date</h2>
@@ -26,10 +40,12 @@ const SearchByDate = () => {
           value={selectedDay}
           onChange={async (day) => {
             setSelectedDay(day);
-            const { data } = await axios.get(
-              `https://blooming-wildwood-07126.herokuapp.com/tasks/${date}`
-            );
-            setSelectedTasks(data);
+            refetch();
+
+            // const { data } = await axios.get(
+            //   `https://blooming-wildwood-07126.herokuapp.com/tasks/${date}`
+            // );
+            // setSelectedTasks(data);
           }}
           shouldHighlightWeekends
         />

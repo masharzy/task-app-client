@@ -9,6 +9,7 @@ import UpdateTask from "./Pages/UpdateTask/UpdateTask";
 import CompletedTasks from "./Pages/CompletedTasks/CompletedTasks";
 import SearchByDate from "./Pages/SearchByDate/SearchByDate";
 import Footer from "./Pages/Shared/Footer/Footer";
+import Spinner from "./Pages/Shared/Spinner/Spinner";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/update-task/:id" element={<UpdateTask />} />
         <Route path="/completed-tasks" element={<CompletedTasks />} />
         <Route path="/calendar" element={<SearchByDate />} />
+        <Route path="/spinner" element={<Spinner />} />
       </Routes>
       <Footer/>
       <ToastContainer
