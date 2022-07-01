@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import Spinner from "../Shared/Spinner/Spinner";
 
@@ -13,9 +12,9 @@ const CompletedTasks = () => {
       <div className="grid lg:grid-cols-2 lg:px-40 px-5 lg:gap-x-5 mx-auto">
         {completedTasks.map((completedTask) => (
           <div className="w-full mx-auto mt-5" key={completedTask._id}>
-            <div class="rounded-lg bg-gray-800 shadow-xl text-left p-5 flex justify-between items-center">
+            <div className="rounded-lg bg-gray-800 shadow-xl text-left p-5 flex justify-between items-center">
               <div className="flex">
-                <input type="checkbox" checked disabled class="checkbox mr-2" />
+                <input type="checkbox" checked disabled className="checkbox mr-2" />
                 <p>{completedTask.name}</p>
               </div>
             </div>

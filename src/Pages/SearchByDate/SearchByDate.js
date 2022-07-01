@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
-import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
-import { useQuery } from "react-query";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
+import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import axios from "axios";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Spinner from "../Shared/Spinner/Spinner";
 
 const SearchByDate = () => {
@@ -28,8 +28,6 @@ const SearchByDate = () => {
     fetch(`http://localhost:5000/tasks/${date}`).then((res) => res.json())
   );
   if (isLoading) return <Spinner/>;
-  console.log(isLoading);
-    console.log(selectedTasks);
   return (
     <div className="container mx-auto mb-2">
       <h2 className="text-3xl text-white font-bold">Search Task by Date</h2>
@@ -43,7 +41,7 @@ const SearchByDate = () => {
       {selectedTasks.length > 0 ? (
         selectedTasks.map((selectedTask) => (
           <div className="w-full max-w-xl mx-auto mt-5" key={selectedTask._id}>
-            <div class="rounded-lg bg-gray-800 shadow-xl text-left p-5 flex justify-between items-center">
+            <div className="rounded-lg bg-gray-800 shadow-xl text-left p-5 flex justify-between items-center">
               <div className="flex">
                 <input
                   type="checkbox"
@@ -61,10 +59,10 @@ const SearchByDate = () => {
                             toast.success("Task Marked as Completed");
                           }
                         })
-                        .catch((err) => console.log(err));
+                        .catch((err) => toast.error("Error Marking Task as Completed"));
                     }
                   }}
-                  class="checkbox mr-2"
+                  className="checkbox mr-2"
                 />
                 {selectedTask.completed ? (
                   <p>

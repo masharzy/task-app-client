@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import CustomLink from "../../CustomLink/CustomLink";
@@ -15,7 +14,7 @@ const Navbar = () => {
       <CustomLink to="/">Home</CustomLink>
       <CustomLink to="/completed-tasks" className="relative">
         Completed Tasks{" "}
-        <span class="bg-error px-2 absolute text-white rounded-full -right-1 -top-1">
+        <span className="bg-error px-2 absolute text-white rounded-full -right-1 -top-1">
           {completedTasks.length}
         </span>
       </CustomLink>

@@ -1,9 +1,8 @@
-import React from "react";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
-import { toast } from "react-toastify";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Spinner from "../Shared/Spinner/Spinner";
 
 const UpdateTask = () => {
@@ -26,7 +25,6 @@ const UpdateTask = () => {
     await axios
       .put(`http://localhost:5000/task/${id}`, data)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           e.target.reset();
           toast.success("Updated Successfully");
@@ -45,14 +43,14 @@ const UpdateTask = () => {
         Edit Task: <br /> {name}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div class="form-control w-full max-w-md mx-auto">
-          <label class="label">
-            <span class="label-text text-white">Task New Name</span>
+        <div className="form-control w-full max-w-md mx-auto">
+          <label className="label">
+            <span className="label-text text-white">Task New Name</span>
           </label>
           <input
             type="text"
             placeholder="Enter Task New Name"
-            class="input input-bordered w-full"
+            className="input input-bordered w-full"
             defaultValue={name}
             {...register("name", { required: true })}
           />
@@ -60,11 +58,11 @@ const UpdateTask = () => {
             {errors.name?.type === "required" && "Task New Name is Required"}
           </p>
         </div>
-        <div class="form-control w-full max-w-md mx-auto">
+        <div className="form-control w-full max-w-md mx-auto">
           <input
             type="submit"
             value="Update Task"
-            class="btn btn-primary text-white mt-3 w-full"
+            className="btn btn-primary text-white mt-3 w-full"
           />
         </div>
       </form>
